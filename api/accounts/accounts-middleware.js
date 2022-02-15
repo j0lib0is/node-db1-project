@@ -5,33 +5,8 @@ const db = require('../../data/db-config');
 
 // Middleware
 
-// const accountSchema = yup.object({
-//   name: yup
-//     .string()
-//     .trim()
-//     .min(3, 'name of account must be between 3 and 100')
-//     .max(100, 'name of account must be between 3 and 100')
-//     .required('name and budget are required'),
-//   budget: yup
-//     .number('budget of account must be a number')
-//     .positive('budget of account is too large or too small')
-//     .integer(1000000, 'budget of account is too large or too small')
-//     .required('name and budget are required')
-// });
-
 const checkAccountPayload = (req, res, next) => {
-  // try {
-  //   const validatedAccount = await accountSchema.validate(req.body);
-  //   req.body = validatedAccount;
-  //   next()
-  // } catch(err) {
-  //   next(err);
-  // };
-  
-  const name = req.body.name;
-  console.log(name);
-  const budget = req.body.budget;
-  console.log(budget);
+  const { name, budget } = req.body;
 
   if (name === undefined || budget === undefined) {
     next({status: 400, message: 'name and budget are required'});
